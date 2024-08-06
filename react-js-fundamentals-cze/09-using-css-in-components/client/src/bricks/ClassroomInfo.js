@@ -1,9 +1,15 @@
 import React from "react";
+import styles from "../css/classroom.module.css";
 
-class ClassroomInfo extends React.Component {
-  render() {
-    return <h1>Classroom {this.props.classroom.name}</h1>;
-  }
+function ClassroomInfo(props) {
+  return (
+    <h1>
+      Classroom{" "}
+      <span className={styles.classroomNameHeader}>
+        {props.classroom.name}
+      </span>
+    </h1>
+  );
 }
 
 export default ClassroomInfo;
