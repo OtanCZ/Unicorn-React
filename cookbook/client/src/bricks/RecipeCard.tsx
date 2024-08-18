@@ -1,17 +1,15 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
-import Icon from "@mdi/react";
-import {mdiAccountSchoolOutline, mdiIdentifier} from "@mdi/js";
-import {Recipe} from "../interfaces";
+import {Ingredient, Recipe} from "../interfaces";
 
 interface RecipeCardProps {
     recipe: Recipe;
+    small: boolean;
 }
 
-function RecipeCard({recipe}: RecipeCardProps) {
+function RecipeCard({recipe, small}: RecipeCardProps) {
     return (
-        <Card className={"border-2 border-emerald-300 rounded-md bg-emerald-800"}>
-            <Card.Body className={"flex flex-col text-center"}>
+        <div className={"border-2 border-emerald-300 rounded-md bg-emerald-800"}>
+            <div className={"flex flex-col text-center w-[80vw] xl:w-[25vw]"}>
                 <div className={"border-b-2 border-b-emerald-300"}>
                     {recipe.name}
                 </div>
@@ -19,11 +17,20 @@ function RecipeCard({recipe}: RecipeCardProps) {
                 <div className={"border-b-2 border-b-emerald-300"}>
                     <img src={recipe.imgUri} alt={"Obrázek " + recipe.name}/>
                 </div>
-                <div className={"h-[20vh] overflow-auto text-left p-1"}>
-                    {recipe.description}
+                <div className={"h-[20vh] overflow-auto text-left p-1 white-space: nowrap;"}>
+                    <ul className={"list-disc list-inside"}>
+                        {recipe.ingredients.map((ingredient: Ingredient) => (
+                                <li>{ingredient.name}</li>
+                            )
+                        )}
+                    </ul>
+                    <div>
+                        {small ? recipe.description.slice(0, 100) + "..." : recipe.description}
+                    </div>
                 </div>
-            </Card.Body>
-        </Card>
+
+            </div>
+        </div>
     );
 }
 
