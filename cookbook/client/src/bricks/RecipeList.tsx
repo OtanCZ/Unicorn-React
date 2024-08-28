@@ -53,36 +53,37 @@ function RecipeList({recipes, state}: RecipeListProps) {
     }
 
     return (
-        <div className={"flex flex-col justify-center items-center w-[100%]"}>
-            <header className={"fixed top-0 w-[100%] h-[7vh] p-2 backdrop-blur-md"}>
-                <nav className={"w-[100%] h-[100%] flex-row flex items-center"}>
+        <div className={"flex flex-col justify-center items-center w-full"}>
+            <header className={"fixed top-[5vh] w-full h-[7vh] p-2 bg-background xl:w-[80%]"}>
+                <nav className={"w-full h-full flex-row flex items-center"}>
                     <h2 className={"text-2xl xl:text-4xl font-bold"}>Receptíky</h2>
-                    <button className={"invisible xl:visible flex justify-center items-center ml-auto h-[80%] aspect-square mr-[1%] rounded-md border-2 border-emerald-300 bg-emerald-700"} onClick={handleSelectChangeButton}>
-                        <Icon path={listTypeButton.path} size={1} />
+                    <button className={"invisible xl:visible flex justify-center items-center ml-auto h-[80%] aspect-square mr-[1%] rounded-md border-2 border-accent bg-primary/10"} onClick={handleSelectChangeButton}>
+                        <Icon path={listTypeButton.path} color={"#ebf3ea"} size={1} />
                     </button>
                     <input type={"search"} placeholder={"Vyhledej v receptech"} onInput={handleSearch}
-                           className={"border-2 rounded-md border-emerald-300 bg-emerald-700 w-[50%] xl:w-[30%] h-[80%]"}></input>
+                           className={"border-2 rounded-md border-accent bg-primary/10 w-[50%] xl:w-[30%] h-[80%]"}></input>
                 </nav>
             </header>
+
             <div className={"mb-[7vh]"}></div>
 
             {state === "loading" && (
-                <div className={"flex justify-center items-center w-[100%] h-[93vh]"}>
+                <div className={"flex justify-center items-center w-full h-[93vh]"}>
                     <h1>Probíhá načítání dat...</h1>
                 </div>
             )}
             {state === "error" && (
-                <div className={"flex justify-center items-center w-[100%] h-[93vh]"}>
+                <div className={"flex justify-center items-center w-full h-[93vh]"}>
                     <h1>Chyba načítání dat!</h1>
                 </div>
             )}
             {state === "success" && (
                 <>
                     {listTypeButton.state === "list" ? (
-                        <ul className="w-[100%]">
+                        <ul className="w-full">
                             {filteredRecipes.map((recipe: Recipe) => (
-                                <li key={recipe.id} className="border-b border-emerald-300 p-4">
-                                    <div className="">
+                                <li key={recipe.id} className="border-b border-accent p-4 mt-[5vh]">
+                                    <div className="w-full">
                                         <div>
                                             <h3 className="text-lg">{recipe.name}</h3>
                                         </div>
@@ -91,7 +92,7 @@ function RecipeList({recipes, state}: RecipeListProps) {
                             ))}
                         </ul>
                     ) : (
-                        <div className={"grid min-w-screen xl:min-w-[80vh] grid-cols-1 xl:grid-cols-3 gap-4 p-5"}>
+                        <div className={"grid min-w-full xl:min-w-[80%] grid-cols-1 xl:grid-cols-3 gap-4 p-5 mt-[5vh]"}>
                             {filteredRecipes.map((recipe: Recipe) => (
                                 <RecipeCard key={recipe.id} recipe={recipe} small={listTypeButton.state === "cards-sm"}/>
                             ))}

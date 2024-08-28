@@ -1,70 +1,28 @@
-import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Ingredient, RecipeLoadState, Recipes} from "./interfaces";
-import RecipeList from "./bricks/RecipeList";
+import Icon from "@mdi/react";
+import React from "react";
+import {Outlet, useNavigate} from "react-router-dom";
 
 function App() {
-    const [recipeLoadCall, setRecipeLoadCall] = useState<RecipeLoadState>({
-        state: "loading",
-        data: [] as Recipes
-    });
-
-    useEffect(() => {
-        const fetchRecipes = async () => {
-            try {
-                const recipesResponse = await fetch("http://localhost:8000/recipe/list", {
-                    method: "GET",
-                });
-
-                const recipesJson = (await recipesResponse.json()) as Recipes;
-
-                if (recipesResponse.status >= 400) {
-                    setRecipeLoadCall({state: "error", data: []});
-                    console.log(recipesJson);
-                    return;
-                }
-
-                const ingredientIds = new Set(
-                    recipesJson.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.id))
-                );
-
-                const ingredientsPromises = Array.from(ingredientIds).map(id =>
-                    fetch(`http://localhost:8000/ingredient/get?id=${id}`).then(res => res.json()).catch(err => {
-                        console.log(err);
-                        return null;
-                    })
-                );
-
-                const ingredientsMap: Record<string, Ingredient> = {};
-                for (const ingredientPromise of ingredientsPromises) {
-                    const ingredient: Ingredient = await ingredientPromise;
-                    ingredientsMap[ingredient.id] = ingredient;
-                }
-
-                setRecipeLoadCall({
-                    state: "success",
-                    data: recipesJson.map(recipe => ({
-                        ...recipe,
-                        ingredients: recipe.ingredients.map(ingredient => ({
-                            ...ingredient,
-                            ...ingredientsMap[ingredient.id],
-                        })),
-                    })),
-                });
-
-            } catch (error) {
-                setRecipeLoadCall({state: "error", data: []});
-                console.error("An error occurred:", error);
-            }
-        };
-        fetchRecipes()
-    }, []);
+    let navigate = useNavigate();
 
     return (
-        <div
-            className={"min-h-screen flex flex-col items-center min-w-screen max-w-screen"}>
-            <RecipeList recipes={recipeLoadCall.data} state={recipeLoadCall.state}/>
+        <div className={"flex flex-col justify-center items-center w-full"}>
+            <header className={"fixed top-0 w-[100%] h-[5vh] p-2 bg-background xl:w-[80%]"}>
+                <nav className={"w-[100%] h-[100%] flex-row flex items-center xl:w-[80%]"}>
+                    <h2 className={"text-2xl xl:text-4xl font-bold"}>Hatchery Recepty</h2>
+
+                    <div className={"ml-auto flex flex-row gap-5 m-2"}>
+                        <button className={"p-2 border-accent rounded-md bg-primary"} onClick={() => navigate("/recipes")} >Recepty</button>
+                        <button className={"p-2 border-accent rounded-md bg-primary"} onClick={() => navigate("/ingredients")} >Ingredience</button>
+                    </div>
+                </nav>
+            </header>
+
+            <Outlet/>
         </div>
+
+
     );
 }
 
