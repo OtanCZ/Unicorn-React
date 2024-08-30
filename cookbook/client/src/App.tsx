@@ -8,8 +8,8 @@ function App() {
 
     return (
         <div className={"flex flex-col justify-center items-center w-full"}>
-            <header className={"fixed top-0 w-[100%] h-[5vh] p-2 bg-background xl:w-[80%]"}>
-                <nav className={"w-[100%] h-[100%] flex-row flex items-center xl:w-[80%]"}>
+            <header className={"fixed top-0 w-full h-[5vh] bg-background xl:w-[80%]"}>
+                <nav className={"w-full h-full flex-row flex items-center xl:w-[80%]"}>
                     <h2 className={"text-2xl xl:text-4xl font-bold"}>Hatchery Recepty</h2>
 
                     <div className={"ml-auto flex flex-row gap-5 m-2"}>

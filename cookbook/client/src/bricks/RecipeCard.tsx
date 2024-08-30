@@ -8,8 +8,9 @@ interface RecipeCardProps {
 
 function RecipeCard({recipe, small}: RecipeCardProps) {
     return (
-        <div className={"border-2 border-accent rounded-md bg-primary/10"}>
-            <div className={"flex flex-col text-center w-[80vw] xl:w-[25vw]"}>
+        <div
+            className={"border-2 border-accent rounded-md bg-primary/10 cursor-pointer hover:bg-primary/15 w-[80vw] xl:w-[25vw]"}>
+            <div className={"flex flex-col text-center"}>
                 <div className={"border-b-2 border-b-accent"}>
                     {recipe.name}
                 </div>
@@ -19,8 +20,8 @@ function RecipeCard({recipe, small}: RecipeCardProps) {
                 </div>
                 <div className={"h-[20vh] overflow-auto text-left p-1 white-space: nowrap;"}>
                     <ul className={"list-disc list-inside"}>
-                        {recipe.ingredients.map((ingredient: Ingredient) => (
-                                <li>{ingredient.name}</li>
+                        {recipe.ingredients.map((ingredient: Ingredient, index) => (
+                                <li key={index}>{ingredient.name}</li>
                             )
                         )}
                     </ul>

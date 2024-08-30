@@ -528,5 +528,159 @@
       }
     ],
     "id": "e6a2450d6d6cd747"
+  },
+  {
+    "name": "Salát z naklíčené čočky",
+    "description": "Mrkev, okurku a papriku nakrájejte na malé kostičky a dejte do větší mísy spolu s naklíčenou čočkou. Cibuli nakrájejte najemno a přidejte k zelenině. Přisypte nasekanou petrželku. V misce nebo hrníčku důkladně promíchejte lák z okurek, olivový olej a med. Zálivku nalijte do mísy a důkladně promíchejte. Na závěr dochuťte solí a pepřem.",
+    "imgUri": "https://zachranjidlo.cz/wp-content/uploads/dsc02309-1-e1652694711486-1024x433-1200x500-c-default.jpg",
+    "ingredients": [
+      {
+        "id": "c6ea4fb4d330d32b",
+        "amount": 200,
+        "unit": "g",
+        "name": "naklíčená čočka"
+      },
+      {
+        "id": "01ed1245cdfd005a",
+        "amount": 1,
+        "unit": "ks",
+        "name": "mrkev"
+      },
+      {
+        "id": "95ff7d609062d4db",
+        "amount": 0.5,
+        "unit": "ks",
+        "name": "menší červená cibule"
+      },
+      {
+        "id": "73fd3db102b7803d",
+        "amount": 0.5,
+        "unit": "ks",
+        "name": "salátová okurka"
+      },
+      {
+        "id": "9416b19e1bd2cd11",
+        "amount": 1,
+        "unit": "ks",
+        "name": "červená paprika"
+      },
+      {
+        "id": "426371a4bbc275f1",
+        "amount": 1,
+        "unit": "hrst",
+        "name": "nasekaná petrželka"
+      },
+      {
+        "id": "e0e1a7f5ccef3dff",
+        "amount": 3,
+        "unit": "lžíce",
+        "name": "lák z okurek"
+      },
+      {
+        "id": "d8e6bbd4d6038494",
+        "amount": 2,
+        "unit": "lžíce",
+        "name": "olivový olej"
+      },
+      {
+        "id": "defe5185b23ca985",
+        "amount": 1,
+        "unit": "lžíce",
+        "name": "med"
+      },
+      {
+        "id": "3f702872fb8e99f8",
+        "amount": 1,
+        "unit": "špetka",
+        "name": "sůl"
+      },
+      {
+        "id": "cd99517791018390",
+        "amount": 1,
+        "unit": "špetka",
+        "name": "pepř"
+      }
+    ],
+    "id": "470374386b5e4083"
+  },
+  {
+    "name": "Drůbeží paštika s vepřovými kousky",
+    "description": "Játra důkladně očistěte. Odkrojky z vepřového rozmixujte do hladka. Přidejte očištěná játra, koření, víno, bylinky, sůl, pepř, česnek, šalotku, 100 g másla a rozmixujte do hladka. Rozmixovanou směsí naplňte menší zavařovací skleničky nebo hřbet vyložený folií. Vložte do pekáčku, podlijte asi 3 cm vody a dejte péct do trouby na 100 °C asi 50 minut. Mezitím si připravte bylinkové máslo na zalití paštiky. Máslo rozpusťte na mírném ohni a následně rozmixujte s medvědím česnekem (stačí polovina, zbytek použijte na ozdobu). Zkontrolujte paštiku. Správně upečená by měla být pěkně růžová. Pokud je hotová, zalijte ji zeleným máslem a dejte chladit na několik hodin, nejlépe do druhého dne. Podávejte s krajícem rozpečeného chleba a čerstvými listy medvědího česneku.",
+    "imgUri": "https://zachranjidlo.cz/wp-content/uploads/pastika-1024x493-1200x500-c-default.png",
+    "ingredients": [
+      {
+        "id": "778400b335f3cf0a",
+        "amount": 150,
+        "unit": "g",
+        "name": "drůbeží játra"
+      },
+      {
+        "id": "0b3a78414e196585",
+        "amount": 100,
+        "unit": "g",
+        "name": "vepřové odkrojky"
+      },
+      {
+        "id": "6740ae2c9acfa794",
+        "amount": 200,
+        "unit": "g",
+        "name": "máslo"
+      },
+      {
+        "id": "2220a6eb35e31dc6",
+        "amount": 1,
+        "unit": "ks",
+        "name": "stroužek česneku"
+      },
+      {
+        "id": "97f5d8e88343e612",
+        "amount": 50,
+        "unit": "g",
+        "name": "sušené bylinky"
+      },
+      {
+        "id": "4a17d47da9503363",
+        "amount": 4,
+        "unit": "lžíce",
+        "name": "červené víno"
+      },
+      {
+        "id": "87dbea8746ecb15d",
+        "amount": 1,
+        "unit": "ks",
+        "name": "šalotka"
+      },
+      {
+        "id": "ce185eb2e7ad2e7c",
+        "amount": 3,
+        "unit": "snítka",
+        "name": "tymián"
+      },
+      {
+        "id": "a088b01b2dc1bd5a",
+        "amount": 0.5,
+        "unit": "lžičky",
+        "name": "divoké koření"
+      },
+      {
+        "id": "3f702872fb8e99f8",
+        "amount": 1,
+        "unit": "špetka",
+        "name": "sůl"
+      },
+      {
+        "id": "cd99517791018390",
+        "amount": 1,
+        "unit": "špetka",
+        "name": "pepř"
+      },
+      {
+        "id": "bc6da7a1358c36ca",
+        "amount": 4,
+        "unit": "plátky",
+        "name": "chléb"
+      }
+    ],
+    "id": "ab75d314a886e4b2"
   }
 ]

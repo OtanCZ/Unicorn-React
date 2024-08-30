@@ -3,7 +3,7 @@ import '../App.css';
 import {Ingredient, RecipeLoadState, Recipes} from "../interfaces";
 import RecipeList from "../bricks/RecipeList";
 
-function IngredientListPage() {
+function RecipeListPage() {
     const [recipeLoadCall, setRecipeLoadCall] = useState<RecipeLoadState>({
         state: "loading",
         data: [] as Recipes
@@ -62,10 +62,10 @@ function IngredientListPage() {
 
     return (
         <div
-            className={"min-h-screen flex flex-col items-center min-w-screen max-w-screen"}>
-            <RecipeList recipes={recipeLoadCall.data} state={recipeLoadCall.state}/>
+            className={"min-h-screen flex flex-col items-center w-full"}>
+            <RecipeList recipes={recipeLoadCall.data} setRecipes={setRecipeLoadCall}  state={recipeLoadCall.state}/>
         </div>
     );
 }
 
-export default IngredientListPage;
+export default RecipeListPage;

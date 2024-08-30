@@ -18,4 +18,10 @@ export interface RecipeLoadState {
     data: Recipes;
 }
 
+export interface IngredientLoadState {
+    state: "loading" | "success" | "error";
+    data: Ingredients;
+}
+
 export type Recipes = Recipe[];
+export type Ingredients = Ingredient[];

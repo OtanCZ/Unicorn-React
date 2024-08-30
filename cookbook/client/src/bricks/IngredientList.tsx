@@ -1,19 +1,21 @@
 import React, {useMemo, useState} from "react";
-import {Recipes, Recipe, RecipeLoadState, Ingredient} from "../interfaces";
+import {Recipes, Recipe, RecipeLoadState, IngredientLoadState, Ingredients, Ingredient} from "../interfaces";
 import RecipeCard from "./RecipeCard";
 import {mdiFormatListBulleted, mdiGridLarge, mdiPlus, mdiViewGridPlusOutline} from "@mdi/js";
 import Icon from "@mdi/react";
 import RecipeModal from "./RecipeModal";
+import IngredientCard from "./IngredientCard";
+import IngredientModal from "./IngredientModal";
 
-interface RecipeListProps {
-    recipes: Recipes;
-    setRecipes: React.Dispatch<React.SetStateAction<RecipeLoadState>>;
-    state: RecipeLoadState['state'];
+interface IngredientListProps {
+    ingredients: Ingredients;
+    setIngredients: React.Dispatch<React.SetStateAction<IngredientLoadState>>;
+    state: IngredientLoadState['state'];
 }
 
-function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
+function IngredientList({ingredients, setIngredients, state}: IngredientListProps) {
     const [searchBy, setSearchBy] = useState("");
-    const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+    const [selectedIngredient, setSelectedIngredient] = useState<Ingredient | null>(null);
 
     let buttonTypes = [
         {
@@ -23,11 +25,6 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
         },
         {
             index: 1,
-            state: "cards-sm",
-            path: mdiGridLarge
-        },
-        {
-            index: 2,
             state: "list",
             path: mdiFormatListBulleted
         }
@@ -36,46 +33,45 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
     const [listTypeButton, changeListTypeButton] = useState(buttonTypes[0]);
 
     const handleSelectChangeButton = (event: any) => {
-        let nextIndex = listTypeButton.index === 2 ? 0 : ++listTypeButton.index;
+        let nextIndex = listTypeButton.index === 1 ? 0 : ++listTypeButton.index;
         changeListTypeButton(buttonTypes[nextIndex]);
     };
 
-    const handleRecipeClick = (recipe: Recipe) => {
-        setSelectedRecipe(recipe);
+    const handleRecipeClick = (ingredient: Ingredient) => {
+        setSelectedIngredient(ingredient);
     };
 
     const closeModal = () => {
-        setSelectedRecipe(null);
+        setSelectedIngredient(null);
     };
 
-    const filteredRecipes = useMemo(() => {
-        return recipes.filter((item) => {
+    const filteredIngredients = useMemo(() => {
+        return ingredients.filter((item) => {
             return (
                 item.name
                     .toLocaleLowerCase()
-                    .includes(searchBy.toLocaleLowerCase()) ||
-                item.description.toLocaleLowerCase().includes(searchBy.toLocaleLowerCase())
+                    .includes(searchBy.toLocaleLowerCase())
             );
         });
-    }, [recipes, searchBy]);
+    }, [ingredients, searchBy]);
 
     function handleSearch(event: any) {
         setSearchBy(event.target.value);
     }
 
-    const saveRecipe = async (updatedRecipe: Recipe) => {
-        console.log("saved " + updatedRecipe.name)
+    const saveIngredient = async (updatedIngredient: Ingredient) => {
+        console.log("saved " + updatedIngredient.name)
 
         let data;
 
-        if (updatedRecipe.id === "") {
+        if (updatedIngredient.id === "") {
             try {
-                const res = await fetch("http://localhost:8000/recipe/create", {
+                const res = await fetch("http://localhost:8000/ingredient/create", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(updatedRecipe)
+                    body: JSON.stringify(updatedIngredient)
                 })
 
                 data = await res.json()
@@ -84,12 +80,12 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
             }
         } else {
             try {
-                const res = await fetch("http://localhost:8000/recipe/update", {
+                const res = await fetch("http://localhost:8000/ingredient/update", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(updatedRecipe)
+                    body: JSON.stringify(updatedIngredient)
                 })
 
                 data = await res.json()
@@ -98,31 +94,32 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
             }
         }
 
-        const updatedRecipes = recipes.map(recipe =>
-            recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+        const updatedIngredients = ingredients.map(ingredient =>
+            ingredient.id === updatedIngredient.id ? updatedIngredient : ingredient
         );
 
-        if (updatedRecipe.id === "") {
-            updatedRecipes.push(data);
+        if (updatedIngredient.id === "") {
+            updatedIngredients.push(data);
         }
 
-        setRecipes({
+        setIngredients({
             state: state,
-            data: updatedRecipes
+            data: updatedIngredients
         });
-        console.log(recipes)
+
+        console.log(ingredients)
         closeModal();
     };
 
-    const deleteRecipe = async (deletedRecipe: Recipe) => {
+    const deleteIngredient = async (deletedIngredient: Ingredient) => {
         let data
         try {
-            const res = await fetch("http://localhost:8000/recipe/delete", {
+            const res = await fetch("http://localhost:8000/ingredient/delete", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(deletedRecipe)
+                body: JSON.stringify(deletedIngredient)
             })
 
             data = await res.json()
@@ -130,14 +127,14 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
             console.log(e);
         }
 
-        let updatedIngredients = [...recipes];
-        const indexToRemove = recipes.findIndex(recipe => recipe.id === deletedRecipe.id);
+        let updatedIngredients = [...ingredients];
+        const indexToRemove = ingredients.findIndex(ingredient => ingredient.id === deletedIngredient.id);
 
         if (indexToRemove !== -1) {
             updatedIngredients.splice(indexToRemove, 1);
         }
 
-        setRecipes({
+        setIngredients({
             state: "success",
             data: updatedIngredients
         });
@@ -146,22 +143,21 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
     }
 
     function handleRecipeAddButton() {
-        let mockRecipe: Recipe = {
+        let mockIngredient: Ingredient = {
             id: "",
-            name: "Nový recept",
-            imgUri: "",
-            description: "",
-            ingredients: []
+            name: "Nová ingredience",
+            amount: 0,
+            unit: ""
         }
 
-        handleRecipeClick(mockRecipe);
-    };
+        handleRecipeClick(mockIngredient);
+    }
 
     return (
         <div className={"flex flex-col justify-center items-center w-full"}>
             <header className={"fixed top-[5vh] w-full h-[5vh] bg-background xl:w-[80%]"}>
                 <nav className={"w-full h-full flex-row flex items-center"}>
-                    <h2 className={"text-2xl xl:text-4xl font-bold"}>Receptíky</h2>
+                    <h2 className={"text-2xl xl:text-4xl font-bold"}>Ingredience</h2>
                     <button
                         className={"invisible xl:visible flex justify-center items-center ml-auto h-[80%] aspect-square mr-[1%] rounded-md border-2 border-accent bg-primary/10"}
                         onClick={handleSelectChangeButton}>
@@ -193,40 +189,41 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
                 <>
                     {listTypeButton.state === "list" ? (
                         <ul className="w-[80%] mt-[4vh]">
-                            {filteredRecipes.map((recipe: Recipe) => (
-                                <li key={recipe.id}
+                            {filteredIngredients.map((ingredient: Ingredient) => (
+                                <li key={ingredient.id}
                                     className="border-b border-accent p-4 w-full cursor-pointer hover:bg-primary/15"
-                                    onClick={() => handleRecipeClick(recipe)}>
+                                    onClick={() => handleRecipeClick(ingredient)}>
                                     <div className="w-full">
                                         <div>
-                                            <h3 className="text-lg">{recipe.name}</h3>
+                                            <h3 className="text-lg">{ingredient.name}</h3>
                                         </div>
                                     </div>
                                 </li>
                             ))}
                         </ul>
                     ) : (
-                        <div className={"grid xl:w-[80%] grid-cols-1 xl:grid-cols-3 gap-4 p-5 xl:p-0 mt-[5vh]"}>
-                            {filteredRecipes.map((recipe: Recipe) => (
-                                <div key={recipe.id} className={"w-full"} onClick={() => handleRecipeClick(recipe)}>
-                                    <RecipeCard recipe={recipe} small={listTypeButton.state === "cards-sm"}/>
+                        <div className={"grid w-full grid-cols-1 xl:grid-cols-3 gap-4 p-5 xl:p-0 mt-[5vh]"}>
+                            {filteredIngredients.map((ingredient: Ingredient) => (
+                                <div key={ingredient.id} className={"w-full"}
+                                     onClick={() => handleRecipeClick(ingredient)}>
+                                    <IngredientCard ingredient={ingredient}/>
                                 </div>
                             ))}
                         </div>
                     )}
                 </>
             )}
-            {selectedRecipe && (
-                <RecipeModal
-                    recipe={selectedRecipe}
+            {selectedIngredient && (
+                <IngredientModal
+                    ingredient={selectedIngredient}
                     onClose={closeModal}
-                    onSave={saveRecipe}
-                    onDelete={deleteRecipe}
-                    editing={selectedRecipe.id === ""}
+                    onSave={saveIngredient}
+                    onDelete={deleteIngredient}
+                    editing={selectedIngredient.id === ""}
                 />
             )}
         </div>
     );
 }
 
-export default RecipeList;
+export default IngredientList;

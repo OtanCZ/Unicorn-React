@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Home from "./routes/Home";
-import RecipeListPage from "./routes/RecipeList";
-import IngredientListPage from "./routes/IngredientList";
+import HomePage from "./routes/HomePage";
+import RecipeListPage from "./routes/RecipeListPage";
+import IngredientListPage from "./routes/IngredientListPage";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -16,7 +16,7 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App/>}>
-                    <Route path="" element={<Home/>}/>
+                    <Route path="" element={<HomePage/>}/>
                     <Route path="recipes" element={<RecipeListPage/>}/>
                     <Route path="ingredients" element={<IngredientListPage/>}/>
                 </Route>
