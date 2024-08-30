@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../App.css';
-import {Ingredient, IngredientLoadState, Ingredients, RecipeLoadState, Recipes} from "../interfaces";
-import RecipeList from "../bricks/RecipeList";
+import {IngredientLoadState, Ingredients} from "../interfaces";
 import IngredientList from "../bricks/IngredientList";
 
 function IngredientListPage() {
@@ -42,7 +41,7 @@ function IngredientListPage() {
 
     return (
         <div
-            className={"min-h-screen flex flex-col items-center min-w-screen max-w-screen"}>
+            className={"min-h-screen flex flex-col items-center w-full"}>
             <IngredientList ingredients={recipeLoadCall.data} setIngredients={setIngredientLoadCall} state={recipeLoadCall.state}/>
         </div>
     );

@@ -2,62 +2,73 @@
   {
     "name": "Salát z naklíčené čočky",
     "description": "Mrkev, okurku a papriku nakrájejte na malé kostičky a dejte do větší mísy spolu s naklíčenou čočkou. Cibuli nakrájejte najemno a přidejte k zelenině. Přisypte nasekanou petrželku. V misce nebo hrníčku důkladně promíchejte lák z okurek, olivový olej a med. Zálivku nalijte do mísy a důkladně promíchejte. Na závěr dochuťte solí a pepřem.",
-    "imgUri": "https://zachranjidlo.cz/wp-content/uploads/dsc02309-1-e1652694711486-1024x433-1200x500-c-default.jpg",
+    "imgUri": "https://1gr.cz/fotky/idnes/23/083/r7/JVE86df17_15811_100548901.jpg",
     "ingredients": [
       {
         "id": "c6ea4fb4d330d32b",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "name": "naklíčená čočka"
       },
       {
         "id": "01ed1245cdfd005a",
         "amount": 1,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "mrkev"
       },
       {
         "id": "95ff7d609062d4db",
         "amount": 0.5,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "menší červená cibule"
       },
       {
         "id": "73fd3db102b7803d",
         "amount": 0.5,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "salátová okurka"
       },
       {
         "id": "9416b19e1bd2cd11",
         "amount": 1,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "červená paprika"
       },
       {
         "id": "426371a4bbc275f1",
         "amount": 1,
-        "unit": "hrst"
+        "unit": "hrst",
+        "name": "nasekaná petrželka"
       },
       {
         "id": "e0e1a7f5ccef3dff",
         "amount": 3,
-        "unit": "lžíce"
+        "unit": "lžíce",
+        "name": "lák z okurek"
       },
       {
         "id": "d8e6bbd4d6038494",
         "amount": 2,
-        "unit": "lžíce"
+        "unit": "lžíce",
+        "name": "olivový olej"
       },
       {
         "id": "defe5185b23ca985",
         "amount": 1,
-        "unit": "lžíce"
+        "unit": "lžíce",
+        "name": "med"
       },
       {
         "id": "3f702872fb8e99f8",
         "amount": 1,
-        "unit": "špetka"
+        "unit": "špetka",
+        "name": "sůl"
       },
       {
         "id": "cd99517791018390",
         "amount": 1,
-        "unit": "špetka"
+        "unit": "špetka",
+        "name": "pepř"
       }
     ],
     "id": "b6c21cf8807dd356"
@@ -65,62 +76,73 @@
   {
     "name": "Ovesné placičky",
     "description": "Cibuli oloupejte a nastrouhejte nahrubo. Mrkev důkladně umyjte a nastrouhejte najemno spolu s česnekem. V míse smíchejte vločky, cibuli, mrkev, česnek a koření. Přidejte strouhanku a důkladně promíchejte, ideálně rukou tak, aby vznikla jednotná směs. Pokud je směs příliš suchá, přidejte trošku vody, pokud je příliš mokrá, přidejte trošku strouhanky. Na pánvi rozpalte olej, ze směsi vytvarujte malé placičky a smažte z obou stran dozlatova.",
-    "imgUri": "https://zachranjidlo.cz/wp-content/uploads/dsc-0516-1-1024x480-1200x500-c-default.jpg",
+    "imgUri": "https://www.actifit.cz/user/articles/images/recepty-ovesna-placka.jpg",
     "ingredients": [
       {
         "id": "f9996cfda5568262",
         "amount": 2,
-        "unit": "hrnky"
+        "unit": "hrnky",
+        "name": "ovesné vločky"
       },
       {
         "id": "518aea069b179f29",
         "amount": 2,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "větší cibule"
       },
       {
         "id": "01ed1245cdfd005a",
         "amount": 2,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "mrkev"
       },
       {
         "id": "157003980c0a437a",
         "amount": 4,
-        "unit": "lžíce"
+        "unit": "lžíce",
+        "name": "strouhanka"
       },
       {
         "id": "2220a6eb35e31dc6",
         "amount": 2,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "stroužek česneku"
       },
       {
         "id": "0b9ccac3b2f733cc",
         "amount": 1,
-        "unit": "lžička"
+        "unit": "lžička",
+        "name": "drcený kmín"
       },
       {
         "id": "dfa4b721efe898a5",
         "amount": 1,
-        "unit": "lžička"
+        "unit": "lžička",
+        "name": "sladká paprika"
       },
       {
         "id": "97f5d8e88343e612",
         "amount": 1,
-        "unit": "lžička"
+        "unit": "lžička",
+        "name": "sušené bylinky"
       },
       {
         "id": "3f702872fb8e99f8",
         "amount": 1,
-        "unit": "lžička"
+        "unit": "lžička",
+        "name": "sůl"
       },
       {
         "id": "cd99517791018390",
         "amount": 0.25,
-        "unit": "lžičky"
+        "unit": "lžičky",
+        "name": "pepř"
       },
       {
         "id": "40d227ce8a379758",
         "amount": 100,
-        "unit": "ml"
+        "unit": "ml",
+        "name": "olej"
       }
     ],
     "id": "854f2f3cb8954916"
@@ -128,62 +150,73 @@
   {
     "name": "Barbecue burger ze zbylého kuřete",
     "description": "Rozehřejte troubu na 240 °C. Obrané drůbeží maso natrhejte na vlákna, zamíchejte s barbecue omáčkou a rozprostřete do pekáčku. Dejte do trouby a pečte asi 10 minut. Rozpůlené bulky opečte na rozpálené pánvi na sucho z obou stran. Limetu umyjte, nastrouhejte kůru, šťávu vymačkejte a obojí smíchejte s majonézou. Pomocí škrabky udělejte z mrkve tenké proužky. Přendejte je do misky, přidejte špetku soli a pepře a pár kapek limety a promíchejte. Začněte skládat burger. Obě půlky bulek pomažte limetovou majonézou. Na spodní polovinu bulky navrstvěte natrhaný koriandr, na plátky nasekanou chilli papričku, mrkvové proužky, tenká kolečka šalotky a plátek rajčete. Nakonec přidejte vrstvu zapečeného bbq kuřete a plátek cheddaru. Přiklopte vrchní polovinou bulky a podávejte.",
-    "imgUri": "https://zachranjidlo.cz/wp-content/uploads/bbq-kure-burger-1024x493-1200x500-c-default.png",
+    "imgUri": "https://www.pizzerietetcice.cz/foto-produkty/kureci-bbq-burger_220.jpg",
     "ingredients": [
       {
         "id": "9bb6644a5520cf8e",
         "amount": 400,
-        "unit": "g"
+        "unit": "g",
+        "name": "kuřecí maso"
       },
       {
         "id": "a6e8d310c6628d31",
         "amount": 4,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "světlá burger bulka"
       },
       {
         "id": "f6d6a4104a5194d9",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "name": "čedar"
       },
       {
         "id": "87dbea8746ecb15d",
         "amount": 1,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "šalotka"
       },
       {
         "id": "59a3f03b35e69690",
         "amount": 3,
-        "unit": "snítka"
+        "unit": "snítka",
+        "name": "koriandr"
       },
       {
         "id": "f34bba8dd7088dff",
         "amount": 80,
-        "unit": "ml"
+        "unit": "ml",
+        "name": "barbecue omáčka"
       },
       {
         "id": "01ed1245cdfd005a",
         "amount": 1,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "mrkev"
       },
       {
         "id": "b08135ccef590fd6",
         "amount": 1,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "rajče"
       },
       {
         "id": "9c0957e5273de89a",
         "amount": 1,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "limeta"
       },
       {
         "id": "cfb695a5d686cb2e",
         "amount": 2,
-        "unit": "ks"
+        "unit": "ks",
+        "name": "chilli paprička"
       },
       {
         "id": "5cfea498406de1b7",
         "amount": 2,
-        "unit": "lžíce"
+        "unit": "lžíce",
+        "name": "olivový olej"
       }
     ],
     "id": "1ae20af4cfa8efc4"

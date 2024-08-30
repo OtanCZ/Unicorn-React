@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {Recipe, Ingredient, Recipes, Ingredients} from "../interfaces";
+import React, {useState} from "react";
+import {Ingredient} from "../interfaces";
 import Icon from "@mdi/react";
 import {mdiClose, mdiContentSave, mdiPencil, mdiTrashCan} from "@mdi/js";
+import {useUserContext} from "../UserProvider";
 
 interface ModalProps {
     ingredient: Ingredient | null;
@@ -12,13 +13,13 @@ interface ModalProps {
 }
 
 function IngredientModal({ingredient, onClose, onSave, onDelete, editing}: ModalProps) {
+    const {isAdmin} = useUserContext();
     const [editableIngredient, setEditableIngredient] = useState<Ingredient>(ingredient ? {...ingredient} : {
         id: "",
         name: "",
         amount: 0,
         unit: "",
     });
-    console.log(editing);
 
     const [isEditing, setIsEditing] = useState(editing);
     const toggleEdit = () => {
@@ -68,20 +69,26 @@ function IngredientModal({ingredient, onClose, onSave, onDelete, editing}: Modal
     }
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div
                 className="bg-background p-6 rounded-md w-[90vw] xl:w-[50vw] max-h-[90vh] overflow-auto border-accent border-2">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-bold">{isEditing ? editableIngredient.id === "" ? "Nová ingredience" : "Úprava ingredience" : ingredient.name}</h2>
                     <div className="flex space-x-2">
-                        {ingredient.id !== "" && (
-                            <button onClick={handleDelete} className="text-primary">
-                                <Icon path={mdiTrashCan} color={"#4caf50"} size={1}/>
-                            </button>
+                        {isAdmin && (<>
+                                {
+                                    ingredient.id !== "" && (
+                                        <button onClick={handleDelete} className="text-primary">
+                                            <Icon path={mdiTrashCan} color={"#4caf50"} size={1}/>
+                                        </button>
+                                    )
+                                }
+                                <button onClick={isEditing ? handleSave : toggleEdit} className="text-primary">
+                                    <Icon path={isEditing ? mdiContentSave : mdiPencil} color={"#4caf50"} size={1}/>
+                                </button>
+                            </>
+
                         )}
-                        <button onClick={isEditing ? handleSave : toggleEdit} className="text-primary">
-                            <Icon path={isEditing ? mdiContentSave : mdiPencil} color={"#4caf50"} size={1}/>
-                        </button>
                         <button onClick={onClose} className="text-red-500">
                             <Icon path={mdiClose} color={"#f00"} size={1}/>
                         </button>
@@ -109,7 +116,8 @@ function IngredientModal({ingredient, onClose, onSave, onDelete, editing}: Modal
                 )}
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default IngredientModal;

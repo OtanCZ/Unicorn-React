@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Recipe, Ingredient, Recipes, Ingredients} from "../interfaces";
+import {Recipe, Ingredients} from "../interfaces";
 import Icon from "@mdi/react";
 import {mdiClose, mdiContentSave, mdiPencil, mdiTrashCan} from "@mdi/js";
+import {useUserContext} from "../UserProvider";
 
 interface ModalProps {
     recipe: Recipe | null;
@@ -12,6 +13,8 @@ interface ModalProps {
 }
 
 function RecipeModal({recipe, onClose, onSave, onDelete, editing}: ModalProps) {
+    const {isAdmin} = useUserContext();
+    const [portionCount, setPortionCount] = useState(1);
     const [editableRecipe, setEditableRecipe] = useState<Recipe>(recipe ? {...recipe} : {
         id: "",
         name: "",
@@ -51,7 +54,7 @@ function RecipeModal({recipe, onClose, onSave, onDelete, editing}: ModalProps) {
             }
         };
         fetchIngredients()
-    }, []);
+    }, [onClose]);
 
     const handleInputChange = (index: number, value: string) => {
         const newIngredients = [...editableRecipe.ingredients];
@@ -135,21 +138,29 @@ function RecipeModal({recipe, onClose, onSave, onDelete, editing}: ModalProps) {
         onDelete(editableRecipe)
     }
 
+    function portionChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setPortionCount(Number(e.target.value));
+    }
+
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div
                 className="bg-background p-6 rounded-md w-[90vw] xl:w-[50vw] max-h-[90vh] overflow-auto border-accent border-2">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-bold">{isEditing ? editableRecipe.id === "" ? "Nový recept" : "Úprava receptu" : recipe.name}</h2>
                     <div className="flex space-x-2">
-                        {recipe.id !== "" && (
-                            <button onClick={handleDelete} className="text-primary">
-                                <Icon path={mdiTrashCan} color={"#4caf50"} size={1}/>
-                            </button>
+                        {isAdmin && (
+                            <>
+                                {recipe.id !== "" && (
+                                    <button onClick={handleDelete} className="text-primary">
+                                        <Icon path={mdiTrashCan} color={"#4caf50"} size={1}/>
+                                    </button>
+                                )}
+                                <button onClick={isEditing ? handleSave : toggleEdit} className="text-primary">
+                                    <Icon path={isEditing ? mdiContentSave : mdiPencil} color={"#4caf50"} size={1}/>
+                                </button>
+                            </>
                         )}
-                        <button onClick={isEditing ? handleSave : toggleEdit} className="text-primary">
-                            <Icon path={isEditing ? mdiContentSave : mdiPencil} color={"#4caf50"} size={1}/>
-                        </button>
                         <button onClick={onClose} className="text-red-500">
                             <Icon path={mdiClose} color={"#f00"} size={1}/>
                         </button>
@@ -233,15 +244,18 @@ function RecipeModal({recipe, onClose, onSave, onDelete, editing}: ModalProps) {
                     </>
                 ) : (
                     <>
-                        <img src={recipe.imgUri} alt={"Obrázek " + recipe.name}
-                             className="mb-4 w-full h-auto rounded-md"/>
-                        <div className="mb-4">
+                        <div className="">
                             <h3 className="font-bold">Ingredience:</h3>
                             <ul className="list-disc list-inside">
                                 {recipe.ingredients.map((ingredient, index) => (
-                                    <li key={index}>{ingredient.name}</li>
+                                    <li key={index}>{ingredient.name} - {ingredient.amount * portionCount}{ingredient.unit}</li>
                                 ))}
                             </ul>
+                        </div>
+                        <div className={"flex flex-row items-center gap-2 mb-4"}>
+                            <p>Počet porcí:</p>
+                            <input className={"border-2 border-accent bg-primary/10 p-1 rounded-md"}
+                                   defaultValue={portionCount} onChange={portionChange}></input>
                         </div>
                         <div>
                             <h3 className="font-bold">Postup:</h3>

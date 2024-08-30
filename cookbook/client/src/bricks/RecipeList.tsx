@@ -1,9 +1,10 @@
 import React, {useMemo, useState} from "react";
-import {Recipes, Recipe, RecipeLoadState, Ingredient} from "../interfaces";
+import {Recipes, Recipe, RecipeLoadState} from "../interfaces";
 import RecipeCard from "./RecipeCard";
 import {mdiFormatListBulleted, mdiGridLarge, mdiPlus, mdiViewGridPlusOutline} from "@mdi/js";
 import Icon from "@mdi/react";
 import RecipeModal from "./RecipeModal";
+import {useUserContext} from "../UserProvider";
 
 interface RecipeListProps {
     recipes: Recipes;
@@ -12,6 +13,7 @@ interface RecipeListProps {
 }
 
 function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
+    const {isAdmin} = useUserContext();
     const [searchBy, setSearchBy] = useState("");
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
 
@@ -126,6 +128,7 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
             })
 
             data = await res.json()
+            console.log(data);
         } catch (e) {
             console.log(e);
         }
@@ -159,7 +162,7 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
 
     return (
         <div className={"flex flex-col justify-center items-center w-full"}>
-            <header className={"fixed top-[5vh] w-full h-[5vh] bg-background xl:w-[80%]"}>
+            <header className={"fixed top-[5vh] w-full h-[5vh] bg-background xl:w-[80%] z-10"}>
                 <nav className={"w-full h-full flex-row flex items-center"}>
                     <h2 className={"text-2xl xl:text-4xl font-bold"}>Receptíky</h2>
                     <button
@@ -169,11 +172,15 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
                     </button>
                     <input type={"search"} placeholder={"Vyhledej v receptech"} onInput={handleSearch}
                            className={"border-2 rounded-md border-accent bg-primary/10 w-[50%] xl:w-[30%] h-[80%] mr-[1%]"}></input>
-                    <button
-                        className={"flex justify-center items-center h-[80%] aspect-square rounded-md border-2 border-accent bg-primary/10"}
-                        onClick={handleRecipeAddButton}>
-                        <Icon path={mdiPlus} color={"#ebf3ea"} size={1}/>
-                    </button>
+                    {isAdmin && (
+                        <>
+                            <button
+                                className={"flex justify-center items-center h-[80%] aspect-square rounded-md border-2 border-accent bg-primary/10"}
+                                onClick={handleRecipeAddButton}>
+                                <Icon path={mdiPlus} color={"#ebf3ea"} size={1}/>
+                            </button>
+                        </>
+                    )}
                 </nav>
             </header>
 

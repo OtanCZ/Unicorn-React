@@ -1,11 +1,10 @@
 import React, {useMemo, useState} from "react";
-import {Recipes, Recipe, RecipeLoadState, IngredientLoadState, Ingredients, Ingredient} from "../interfaces";
-import RecipeCard from "./RecipeCard";
-import {mdiFormatListBulleted, mdiGridLarge, mdiPlus, mdiViewGridPlusOutline} from "@mdi/js";
+import {IngredientLoadState, Ingredients, Ingredient} from "../interfaces";
+import {mdiFormatListBulleted, mdiPlus, mdiViewGridPlusOutline} from "@mdi/js";
 import Icon from "@mdi/react";
-import RecipeModal from "./RecipeModal";
 import IngredientCard from "./IngredientCard";
 import IngredientModal from "./IngredientModal";
+import {useUserContext} from "../UserProvider";
 
 interface IngredientListProps {
     ingredients: Ingredients;
@@ -14,6 +13,7 @@ interface IngredientListProps {
 }
 
 function IngredientList({ingredients, setIngredients, state}: IngredientListProps) {
+    const {isAdmin} = useUserContext();
     const [searchBy, setSearchBy] = useState("");
     const [selectedIngredient, setSelectedIngredient] = useState<Ingredient | null>(null);
 
@@ -123,6 +123,7 @@ function IngredientList({ingredients, setIngredients, state}: IngredientListProp
             })
 
             data = await res.json()
+            console.log(data);
         } catch (e) {
             console.log(e);
         }
@@ -155,7 +156,7 @@ function IngredientList({ingredients, setIngredients, state}: IngredientListProp
 
     return (
         <div className={"flex flex-col justify-center items-center w-full"}>
-            <header className={"fixed top-[5vh] w-full h-[5vh] bg-background xl:w-[80%]"}>
+            <header className={"fixed top-[5vh] w-full h-[5vh] bg-background xl:w-[80%] z-10"}>
                 <nav className={"w-full h-full flex-row flex items-center"}>
                     <h2 className={"text-2xl xl:text-4xl font-bold"}>Ingredience</h2>
                     <button
@@ -165,11 +166,15 @@ function IngredientList({ingredients, setIngredients, state}: IngredientListProp
                     </button>
                     <input type={"search"} placeholder={"Vyhledej v receptech"} onInput={handleSearch}
                            className={"border-2 rounded-md border-accent bg-primary/10 w-[50%] xl:w-[30%] h-[80%] mr-[1%]"}></input>
-                    <button
-                        className={"flex justify-center items-center h-[80%] aspect-square rounded-md border-2 border-accent bg-primary/10"}
-                        onClick={handleRecipeAddButton}>
-                        <Icon path={mdiPlus} color={"#ebf3ea"} size={1}/>
-                    </button>
+                    {isAdmin && (
+                        <>
+                            <button
+                                className={"flex justify-center items-center h-[80%] aspect-square rounded-md border-2 border-accent bg-primary/10"}
+                                onClick={handleRecipeAddButton}>
+                                <Icon path={mdiPlus} color={"#ebf3ea"} size={1}/>
+                            </button>
+                        </>
+                    )}
                 </nav>
             </header>
 
@@ -202,7 +207,7 @@ function IngredientList({ingredients, setIngredients, state}: IngredientListProp
                             ))}
                         </ul>
                     ) : (
-                        <div className={"grid w-full grid-cols-1 xl:grid-cols-3 gap-4 p-5 xl:p-0 mt-[5vh]"}>
+                        <div className={"grid w-[80%] grid-cols-1 xl:grid-cols-3 gap-4 p-5 xl:p-0 mt-[5vh]"}>
                             {filteredIngredients.map((ingredient: Ingredient) => (
                                 <div key={ingredient.id} className={"w-full"}
                                      onClick={() => handleRecipeClick(ingredient)}>
