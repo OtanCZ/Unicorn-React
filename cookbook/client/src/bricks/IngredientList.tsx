@@ -1,10 +1,12 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {IngredientLoadState, Ingredients, Ingredient} from "../interfaces";
 import {mdiFormatListBulleted, mdiPlus, mdiViewGridPlusOutline} from "@mdi/js";
 import Icon from "@mdi/react";
 import IngredientCard from "./IngredientCard";
 import IngredientModal from "./IngredientModal";
 import {useUserContext} from "../UserProvider";
+import {useSearchParams} from "react-router-dom";
+
 
 interface IngredientListProps {
     ingredients: Ingredients;
@@ -16,6 +18,7 @@ function IngredientList({ingredients, setIngredients, state}: IngredientListProp
     const {isAdmin} = useUserContext();
     const [searchBy, setSearchBy] = useState("");
     const [selectedIngredient, setSelectedIngredient] = useState<Ingredient | null>(null);
+    const [searchParams] = useSearchParams();
 
     let buttonTypes = [
         {
@@ -153,6 +156,14 @@ function IngredientList({ingredients, setIngredients, state}: IngredientListProp
 
         handleRecipeClick(mockIngredient);
     }
+
+    useEffect(() => {
+        if (searchParams.get("ingredient") && state === "success") {
+            const selectedIngredient = ingredients.find(ingredient => ingredient.id === searchParams.get("ingredient")) as Ingredient | null;
+            if (selectedIngredient) setSelectedIngredient(selectedIngredient);
+            searchParams.delete('ingredient');
+        }
+    }, [state])
 
     return (
         <div className={"flex flex-col justify-center items-center w-full"}>

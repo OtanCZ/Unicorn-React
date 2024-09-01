@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Ingredient} from "../interfaces";
 import Icon from "@mdi/react";
-import {mdiClose, mdiContentSave, mdiPencil, mdiTrashCan} from "@mdi/js";
+import {mdiClose, mdiContentSave, mdiPencil, mdiShare, mdiTrashCan} from "@mdi/js";
 import {useUserContext} from "../UserProvider";
 
 interface ModalProps {
@@ -68,6 +68,20 @@ function IngredientModal({ingredient, onClose, onSave, onDelete, editing}: Modal
         onDelete(editableIngredient)
     }
 
+    function copyIngredientToClipboard() {
+        if(ingredient === null) return;
+        const handleCopyClick = async () => {
+            try {
+                //todo redo this for potential prod
+                await navigator.clipboard.writeText("http://localhost:3000/ingredients?ingredient=" + ingredient.id);
+                alert("URL zkopírováno!")
+            } catch(e) {
+                console.log(e);
+            }
+        }
+        handleCopyClick();
+    }
+
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div
@@ -89,6 +103,9 @@ function IngredientModal({ingredient, onClose, onSave, onDelete, editing}: Modal
                             </>
 
                         )}
+                        <button onClick={copyIngredientToClipboard} className="text-primary">
+                            <Icon path={mdiShare} color={"#4caf50"} size={1}/>
+                        </button>
                         <button onClick={onClose} className="text-red-500">
                             <Icon path={mdiClose} color={"#f00"} size={1}/>
                         </button>

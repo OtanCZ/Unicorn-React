@@ -1,10 +1,11 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {Recipes, Recipe, RecipeLoadState} from "../interfaces";
 import RecipeCard from "./RecipeCard";
 import {mdiFormatListBulleted, mdiGridLarge, mdiPlus, mdiViewGridPlusOutline} from "@mdi/js";
 import Icon from "@mdi/react";
 import RecipeModal from "./RecipeModal";
 import {useUserContext} from "../UserProvider";
+import {useSearchParams} from "react-router-dom";
 
 interface RecipeListProps {
     recipes: Recipes;
@@ -16,6 +17,7 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
     const {isAdmin} = useUserContext();
     const [searchBy, setSearchBy] = useState("");
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+    const [searchParams] = useSearchParams();
 
     let buttonTypes = [
         {
@@ -158,7 +160,18 @@ function RecipeList({recipes, setRecipes, state}: RecipeListProps) {
         }
 
         handleRecipeClick(mockRecipe);
-    };
+    }
+
+    useEffect(() => {
+        if (searchParams.get("recipe") && state === "success") {
+            console.log(recipes)
+            console.log(searchParams.get("recipe"));
+            const selectedRecipe = recipes.find(recipe => recipe.id === searchParams.get("recipe")) as Recipe | null;
+            console.log(selectedRecipe);
+            if (selectedRecipe) setSelectedRecipe(selectedRecipe);
+            searchParams.delete('recipe');
+        }
+    }, [state])
 
     return (
         <div className={"flex flex-col justify-center items-center w-full"}>

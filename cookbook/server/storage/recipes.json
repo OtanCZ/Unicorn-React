@@ -177,12 +177,6 @@
         "name": "šalotka"
       },
       {
-        "id": "59a3f03b35e69690",
-        "amount": 3,
-        "unit": "snítka",
-        "name": "koriandr"
-      },
-      {
         "id": "f34bba8dd7088dff",
         "amount": 80,
         "unit": "ml",
@@ -217,6 +211,12 @@
         "amount": 2,
         "unit": "lžíce",
         "name": "olivový olej"
+      },
+      {
+        "id": "59a3f03b35e69690",
+        "amount": 10,
+        "unit": "g",
+        "name": "koriandr"
       }
     ],
     "id": "1ae20af4cfa8efc4"
